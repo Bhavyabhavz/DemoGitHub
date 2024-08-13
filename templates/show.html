@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Lemon&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+    .card {
+        width: 330px;
+        margin-bottom: 50px;
+        border: 1px solid black;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition-bottom: 50px;
+    }
+</style>
+</head>
+<body>
+
+<div class="container-fluid"><br>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mynavbar">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="" style="color:#FFFFFF">HOME</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript:void(0)" style="color:#FFFFFF">CONTACT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'cart_path' %}" style="color:#FFFFFF">CART</a>
+                    </li>
+                </ul>
+
+                <form class="d-flex"  method="POST">
+                    {% csrf_token %}
+                    <select name="category">
+                        {% for x in value %}
+                        <option value="{{ x.category_id }}">{{x.category_name}}</option>
+                        {% endfor %}
+                    </select>
+                    <input class="form-control me-2" type="text" placeholder="search" name="search">
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </form>
+                <button class="btn btn-success" type="button"><a href="{% url 'login_path' %}" style="text-decoration:None;color:white;">Login</a></button>
+                <button class="btn btn-success" type="button"><a href="{% url 'signup_path' %}" style="text-decoration:None;color:white;">Sign Up</a></button>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <br>
+        <h3 class="text-center" style="font-family: 'Lemon', serif;">READERS HEAVEN</h3>
+    </div><br>
+    <div class="container-fluid">
+        <img src="{% static 'images/pic.jpg' %}" width="100%" height="500px">
+    </div><br>
+    <div>
+      <h3 class="text-center" style="font-family:'Times new roman', serf;">Best sellers ever</h3>
+    </div><br>
+    <div class="row">
+        {% for x in b_data %}
+        <div class="col sm-3">
+            <a href="{% url 'product_path' x.id %}" style="text-decoration:None;">
+            <div class="card" style="width:330px;">
+                <img class="card-img-top" src="{{x.book_img.url}}" alt="Card image" style="width:100%;height:350px" height="300px">
+                <div class="card-body">
+                    <h5 class="card-title" style="font-family: 'Lemon', serif;">{{x.book_name}}</h5>
+                    <p class="card-text" style="font-family: 'Lemon', serif;">{{x.book_author}}</p>
+                    <p class="card-text" style="color:#d4bebe;">${{x.book_price}}</p>
+                </div>
+            </div></a>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+</body>
+</html>

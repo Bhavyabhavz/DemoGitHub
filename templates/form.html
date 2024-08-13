@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="text" name="bookname" placeholder="Bookname">
+    <input type="text" name="bookauthor" placeholder="Bookauthor">
+    <select name="category">
+        {% for x in value %}
+        <option value="{{x.category_name}}">{{x.category_name}}</option>
+        {% endfor %}
+    </select>
+    <input type="text" name="bookprice" placeholder="Bookprice">
+    <input type="file" name="bookimg">
+    <input type="submit" value="submit">
+</form>
+</body>
+</html>

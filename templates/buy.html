@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>buy</title>
+</head>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<body>
+<header>
+  <nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+      <h1 style="font-family: 'Lemon', serif;">READERS HEAVEN</h1>
+    </div>
+  </nav>
+</header>
+<div class="container text-center">
+  <div class="card-container mx-auto">
+    {% for x in value %}
+    <div class="card mb-3" style="max-width: 840px;">
+      <div class="row g-0">
+        <div class="col-md-4 align-self-center">
+          <img src="{{ x.book_img.url }}" class="img-thumbnail" alt="Book Cover">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body" style="width: 100%;">
+            <h5 class="card-title">{{ x.book_name }}</h5>
+            <h6 class="card-text">Author: {{ x.book_author }}</h6>
+            <p class="card-text"><b>Address</b></p>
+            <form method="POST">
+              {% csrf_token %}
+              <input type="text" placeholder="Housename" required><br><br>
+              <input type="text" placeholder="Post" required><br><br>
+              <input type="text" placeholder="City" required><br><br>
+              <input type="text" placeholder="Dist" required><br><br>
+              <input type="text" placeholder="Pin code" required><br><br>
+
+              <p><b>Payment details</b></p>
+              <input type="radio" name="payment">Online payment<br>
+              <input type="radio" name="payment">Cash on delivery<br><br>
+              <input type="submit" placeholder="submit">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+</body>
+</html>
